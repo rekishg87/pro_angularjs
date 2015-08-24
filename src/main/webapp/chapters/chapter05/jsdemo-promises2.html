@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="demo" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <script src="scripts/angular.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <link href="css/bootstrap-theme.css" rel="stylesheet"/>
+    <script type="text/javascript">
+        var myApp = angular.module("demo", []);
+
+        myApp.controller('demoCtrl', ['$scope', '$http', function($scope, $http) {
+           $http.get("todo.json").then(function(response) {
+               $scope.todos = response.data;
+           }, function() {
+               $scope.todos = [{action: "Error"}];
+           }).then(function() {
+               $scope.todos.push({action: "Request Complete"});
+           });
+        }]);
+
+    </script>
+</head>
+<body ng-controller="demoCtrl">
+    <div class="panel">
+        <h1>To Do</h1>
+        <table class="table">
+            <tr><td>Action</td><td>Done</td></tr>
+            <tr ng-repeat="item in todos">
+                <td>{{ item.action }}</td>
+                <td>{{ item.done }}</td>
+            </tr>
+        </table>
+    </div>
+    This is a simple example
+</body>
+</html>

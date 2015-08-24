@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <script src="scripts/angular.js"></script>
+    <script type="text/javascript">
+        var myData = {
+            name: "Adam",
+            weather: "sunny",
+            printMessages: function () {
+                console.log("Hello " + this.name + ". ");
+                console.log("Today is " + this.weather + ".");
+            }
+        };
+        myData.printMessages();
+    </script>
+</head>
+<body>
+    This is a simple example
+</body>
+</html>
