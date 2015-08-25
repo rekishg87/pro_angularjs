@@ -12,7 +12,7 @@
         <h3>Ship to</h3>
         <div class="from-group">
             <label>Name</label>
-            <input class="form-control"
+            <input name="name" class="form-control"
                    ng-model="data.shipping.name" required/>
             <span class="error" ng-show="shippingForm.name.$error.required">
                 Please enter a name
@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <label>Street Address</label>
-            <input class="form-control"
+            <input name="street" class="form-control"
                    ng-model="data.shipping.street" required/>
             <span class="error" ng-show="shippingForm.street.$error.required">
                 Please enter a street address
