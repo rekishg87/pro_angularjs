@@ -19,4 +19,19 @@ angular.module("sportsStoreAdmin")
                     $scope.authenticationError = error;
                 });
             }
+    }])
+    .controller("mainCtrl", ['$scope', function($scope) {
+
+        $scope.screens = ["Products", "Orders"];
+        $scope.current = $scope.screens[0];
+
+        $scope.setScreen = function(index) {
+            $scope.current = $scope.screens[index];
+        };
+
+        $scope.getScreen = function () {
+
+            return $scope.current == "Products"
+                ? "views/adminProducts.html" : "views/adminOrders.html";
+        };
     }]);
