@@ -33,17 +33,27 @@
                 }
             };
         });
+
+        myApp.filter("dayName", function() {
+            var dayNames = [
+                "Sunday", "Monday", "Tuesday", "Wednesday",
+                "Thursday", "Friday", "Saturday"
+            ];
+            return function(input) {
+                return angular.isNumber(input) ? dayNames[input] : input;
+            };
+        });
     </script>
 </head>
 <body>
-    <div class="panel" ng-controller="dayCtrl">
+    <div class="panel">
         <div class="page-header">
             <h3>AngularJS App</h3>
         </div>
         <h4 ng-controller="dayCtrl" highlight="Wednesday">
-            Today is {{ day || "(Unknown)" }}
+            Today is {{ day || "(Unknown)" | dayName }}
         </h4>
-        <h4 ng-controller="tomorrowCtrl">Tomorrow is {{ day || "(unknown)" }}</h4>
+        <h4 ng-controller="tomorrowCtrl">Tomorrow is {{ day || "(unknown)" | dayName }}</h4>
     </div>
 </body>
 </html>
