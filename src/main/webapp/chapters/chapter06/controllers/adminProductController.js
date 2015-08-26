@@ -4,9 +4,9 @@
 
 angular.module("sportsStoreAdmin")
     .constant("productUrl", "http://localhost:5500/products/")
-    .config([function($httpProvider) {
+    .config(function($httpProvider) {
           $httpProvider.defaults.withCredentials = true;
-    }])
+    })
     .controller("productCtrl",
         ['$scope', '$resource', 'productUrl',
             function($scope, $resource, productUrl) {
