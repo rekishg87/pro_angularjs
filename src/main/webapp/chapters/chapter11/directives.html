@@ -35,7 +35,7 @@
                     <th>Done</th>
                 </tr>
             </thead>
-            <tr ng-repeat="item in todos" ng-hide="item.complete">
+            <tr ng-repeat="item in todos | filter: {complete: 'false'}">
                 <td>{{$index + 1}}</td>
                 <td>{{item.action}}</td>
                 <td>{{item.complete}}</td>
