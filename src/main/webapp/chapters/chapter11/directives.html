@@ -20,7 +20,7 @@
 
                     $scope.buttonNames = ["Red", "Green", "Blue"];
 
-                    $scope.setting = {
+                    $scope.settings = {
                         Rows: "Red",
                         Columns: "Green"
                     };
@@ -41,7 +41,7 @@
                 <h4>{{ key }}</h4>
                 <div class="radio" ng-repeat="button in buttonNames">
                     <label>
-                        <input type="radio" ng-model="settings[key"
+                        <input type="radio" ng-model="settings[key]"
                                 value="{{ button }}">{{ button }}
                     </label>
                 </div>
