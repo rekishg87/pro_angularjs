@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Filters</title>
     <script src="scripts/angular.js"></script>
-    <!--<script src="scripts/angular-locale_fr-fr.js"></script>-->
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
     <script>
@@ -25,10 +24,13 @@
                         { name: "Whiskey", category: "Drinks", price: 45.99, expiry: 365 }
                     ];
 
-                    $scope.getExpiryDate = function(days) {
-                        var now = new Date();
-                        return now.setDate(now.getDate() + days);
-                    };
+                    $scope.limitVal = "5";
+                    $scope.limitRange = [];
+
+                    for(var i = (0 - $scope.products.length);
+                            i <= $scope.products.length; i++) {
+                        $scope.limitRange.push(i.toString());
+                    }
                 });
     </script>
 </head>
@@ -38,6 +40,12 @@
             Products
             <span class="label label-primary">{{ products.length }}</span>
         </h3>
+    </div>
+
+    <div class="panel-body">
+        Limit: <select ng-model="limitVal"
+                       ng-options="item for item in limitRange">
+               </select>
     </div>
 
     <div class="panel-body">
@@ -51,10 +59,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="p in products">
+                <tr ng-repeat="p in products | limitTo:limitVal">
                     <td>{{ p.name }}</td>
                     <td>{{ p.category }}</td>
-                    <td>{{ getExpiryDate(p.expiry) | date:"shortDate" }}</td>
+                    <td>{{ p.expiry }}</td>
                     <td class="text-right">{{ p.price | currency }}</td>
                 </tr>
             </tbody>
