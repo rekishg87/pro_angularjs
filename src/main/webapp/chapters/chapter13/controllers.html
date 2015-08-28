@@ -13,7 +13,7 @@
 
         $(document).ready(function() {
             $('#jqui button').button().click(function(e) {
-                alert("jQuery UI Button was clicked");
+                angular.element(angularRegion).scope().$apply('handleClick()');
             });
         });
 
