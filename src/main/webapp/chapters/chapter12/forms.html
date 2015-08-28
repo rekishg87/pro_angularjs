@@ -17,7 +17,7 @@
 
                     $scope.message = "Ready";
 
-                    $scope.error = function(error) {
+                    $scope.getError = function(error) {
                         if(angular.isDefined(error)) {
                             if(error.required) {
                                 return "Please enter a value";
