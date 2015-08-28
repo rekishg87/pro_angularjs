@@ -31,6 +31,10 @@
                             i <= $scope.products.length; i++) {
                         $scope.limitRange.push(i.toString());
                     }
+
+                    $scope.selectItems = function(item) {
+                        return item.category == "Fish" || item.name == "Beer";
+                    };
                 });
     </script>
 </head>
@@ -59,7 +63,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="p in products | filter:{ category: 'Fish'}">
+                <tr ng-repeat="p in products | filter:selectItems">
                     <td>{{ p.name }}</td>
                     <td>{{ p.category }}</td>
                     <td>{{ p.expiry }}</td>
