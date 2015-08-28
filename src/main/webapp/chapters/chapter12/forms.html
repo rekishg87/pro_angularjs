@@ -3,38 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Forms</title>
-    <script src="scripts/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
     <script>
         angular.module("exampleApp", [])
                 .controller("defaultCtrl", function($scope) {
 
-                    $scope.requireValue = true;
-                    $scope.matchPattern = new RegExp("^[a-z]");
-
                 });
     </script>
 </head>
 <body>
     <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
-        <form name="myForm" novalidate
-              ng-class="showValidation ? 'validate' : ''">
+        <form name="myForm" novalidate>
             <div class="well">
-                <div class="form-group">
-                    <label>Text:</label>
-                    <input name="sample" class="form-control" ng-model="inputValue"
-                            ng-required="requireValue" ng-minlength="3"
-                           ng-maxlength="10" ng-pattern="matchPattern">
+                <div class="checkbox">
+                    <label>
+                        <input name="sample" type="checkbox" ng-model="inputValue"
+                               ng-true-value="Hurrah!" ng-false-value="Boo!">
+                               This is a checkbox
+                    </label>
                 </div>
             </div>
 
             <div class="well">
-                <p>Required Error: {{ myForm.sample.$error.required }}</p>
-                <p>Min Length Error: {{ myForm.sample.$error.minlength }}</p>
-                <p>Max Length Error: {{ myForm.sample.$error.maxlength }}</p>
-                <p>Pattern Error: {{ myForm.sample.$error.pattern }}</p>
-                <p>Element Valid: {{ myForm.sample.$valid }}</p>
+                <p>Model Value: {{ inputValue }}</p>
             </div>
         </form>
     </div>
