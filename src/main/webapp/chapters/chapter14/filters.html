@@ -59,7 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="p in products | limitTo:limitVal">
+                <tr ng-repeat="p in products | filter:{ category: 'Fish'}">
                     <td>{{ p.name }}</td>
                     <td>{{ p.category }}</td>
                     <td>{{ p.expiry }}</td>
