@@ -13,9 +13,19 @@
                     $scope.addUser = function(userDetails) {
                         $scope.message = userDetails.name
                             + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
-                    }
+                    };
 
                     $scope.message = "Ready";
+
+                    $scope.error = function(error) {
+                        if(angular.isDefined(error)) {
+                            if(error.required) {
+                                return "Please enter a value";
+                            } else if(error.email) {
+                                return "Please enter a valid email address";
+                            }
+                        }
+                    };
                 });
     </script>
     <style>
