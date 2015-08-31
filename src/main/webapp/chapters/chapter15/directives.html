@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Directives</title>
+    <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/angular.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
@@ -14,11 +15,12 @@
                         var propertyExpression = attrs["listProperty"];
 
                         if(angular.isArray(data)) {
-                            var listElem = angular.element("<ul>");
+                            var listElem = angular.element("<ul>").appendTo(element);
                             element.append(listElem);
                             for(var i = 0; i < data.length; i++) {
                                 (function () {
-                                    var itemElement = angular.element('<li>');
+                                    var itemElement =
+                                            angular.element('<li>').appendTo(listElem);
                                     listElem.append(itemElement);
                                     var index = i;
                                     var watcherFn = function(watchScope) {
