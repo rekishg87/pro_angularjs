@@ -12,20 +12,18 @@
                     return {
                         template:
                                 "<div class='panel-body'>Name: <input ng-model=name /></div>",
+                        scope: true
                     }
                 })
                 .controller("scopeCtrl", function($scope) {
                     // Do nothing - no behaviours required
-                })
-                .controller("secondCtrl", function($scope) {
-                    // Do nothing - no behaviours required
-                })
+                });
     </script>
 </head>
 <body>
     <div class="panel panel-default">
-        <div ng-controller="scopeCtrl" class="panel-body" scope-demo></div>
-        <div ng-controller="secondCtrl"class="panel-body" scope-demo></div>
+        <div class="panel-body" scope-demo></div>
+        <div class="panel-body" scope-demo></div>
     </div>
 </body>
 </html>
