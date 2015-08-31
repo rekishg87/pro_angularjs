@@ -11,7 +11,7 @@
                 .directive("unorderedList", function() {
                     return {
                         link: function(scope, element, attrs) {
-                            var data = scope[attrs]["unorderedList"] || attrs["listSource"]];
+                            var data = scope[attrs["unorderedList"] || attrs["listSource"]];
                             var properryExpression = attrs["listProperty"] || "price | currency";
 
                             if(angular.isArray(data)) {
