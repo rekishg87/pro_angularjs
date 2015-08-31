@@ -8,9 +8,12 @@
         angular.module("exampleApp", [])
                 .directive("demoDirective", function() {
                     return function(scope, element, attrs) {
-                        var listElem = element.append("<ol>");
+                        var listElem = angular.element("<ol>");
+                        element.append(listElem);
                         for(var i = 0; i < scope.names.length; i++) {
-                            listElem.append("<li>").append("<span>").text(scope.names[i]);
+                            listElem.append(angular.element("<li>")
+                                    .append(angular.element("<span>")
+                                    .text(scope.names[i])));
                         }
                     }
                 })
