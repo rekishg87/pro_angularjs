@@ -6,11 +6,6 @@
     <script src="scripts/angular.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
-    <script type="text/template" id="listTemplate">
-        <ul>
-            <li ng-repeat="item in data">{{ item.price | currency }}</li>
-        </ul>
-    </script>
     <script>
         angular.module("exampleApp", [])
                 .directive("unorderedList", function() {
@@ -19,7 +14,8 @@
                             scope.data = scope[attrs["unorderedList"]];
                         },
                         restrict: "A",
-                        templateUrl: "tableTemplate.html"
+                        templateUrl: "tableTemplate.html",
+                        replace: true
                     }
                 })
                 .controller("defaultCtrl", function($scope) {
@@ -40,9 +36,9 @@
         </div>
 
         <div class="panel-body">
-           <div unordered-list="products" class="table table-striped">
-               This is where the list will go
-           </div>
+            <div unordered-list="products" class="table table-striped">
+                This is where the list will go
+            </div>
         </div>
     </div>
 </body>
