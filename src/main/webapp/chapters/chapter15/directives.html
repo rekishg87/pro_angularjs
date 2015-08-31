@@ -8,6 +8,11 @@
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
     <script>
         angular.module("exampleApp", [])
+                .directive("unorderedList", function() {
+                    return function(scope, element, attrs) {
+                        // Implementation code will go here
+                    }
+                })
                 .controller("defaultCtrl", function($scope) {
 
                     $scope.products = [
