@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Services and Modules</title>
     <script src="scripts/angular.js"></script>
+    <script src="directives/directives.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet"/>
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
     <script>
-        angular.module("exampleApp", [])
+        angular.module("exampleApp", ["customDirectives"])
                 .controller("defaultCtrl", function($scope) {
                     $scope.data = {
                         cities: ["London", "New York", "Paris"],
@@ -19,7 +20,6 @@
                     });
                 });
     </script>
-    <script src="directives/directives.js"></script>
 </head>
 <body ng-controller="defaultCtrl">
     <div class="well">
