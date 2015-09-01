@@ -61,6 +61,7 @@
                             };
 
                             ctrl.$render = function() {
+                                validateParser(ctrl.$viewValue);
                                 setSelected(ctrl.$viewValue || "Not Sure");
                             }
 
