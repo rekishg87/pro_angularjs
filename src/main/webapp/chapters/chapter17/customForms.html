@@ -36,7 +36,11 @@
                                     }
                                 }
                             }
-                            setSelected(scope.dataValue);
+
+                            ctrl.$render = function() {
+                                setSelected(ctrl.$viewValue || "Not Sure");
+                            }
+
                         }
                     }
                 });
