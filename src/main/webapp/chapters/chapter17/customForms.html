@@ -27,6 +27,7 @@
                         require: "ngModel",
                         template: document.querySelector("#triTemplate").outerText,
                         link: function(scope, element, attrs, ctrl) {
+
                             ctrl.$formatters.push(function(value) {
                                 return value == "Huh?" ? "Not Sure" : value;
                             });
@@ -46,7 +47,7 @@
                                         buttons.eq(i).addClass("btn-primary");
                                     }
                                 }
-                            }
+                            };
 
                             ctrl.$render = function() {
                                 setSelected(ctrl.$viewValue || "Not Sure");
@@ -68,6 +69,7 @@
             <option>Yes</option>
             <option>No</option>
             <option>Not Sure</option>
+            <option>Huh?</option>
         </select>
     </div>
 </body>
