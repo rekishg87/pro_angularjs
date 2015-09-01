@@ -9,7 +9,9 @@
     <script>
         angular.module("exampleApp", [])
                 .config(function($locationProvider) {
-                    $locationProvider.html5Mode(true);
+                    if(window.history && history.pushState) {
+                        $locationProvider.html5Mode(true);
+                    }
                 })
                 .controller("defaultCtrl", function($scope, $location) {
 
