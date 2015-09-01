@@ -2,7 +2,7 @@
  * Created by Rekish on 9/1/2015.
  */
 
-angular.module("exampleApp")
+angular.module("customDirectives", [])
     .directive("triButton", function() {
         return {
             scope: { counter: "=counter" },
