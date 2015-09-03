@@ -10,8 +10,11 @@
         angular.module("exampleApp", [])
                 .controller("defaultCtrl", function($scope, $http) {
                     $scope.loadData = function() {
-                        $http.get("backend-data/productData.json").success(function(data) {
-                            $scope.products = data;
+                        $http.get("backend-data/productData.json").then(function(response) {
+                            console.log("Status: " + response.status);
+                            console.log("Type: " + response.headers("content-type"));
+                            console.log("Length: " + response.headers("content-length"));
+                            $scope.products = response.data;
                         });
                     }
                 });
