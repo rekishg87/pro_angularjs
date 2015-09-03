@@ -30,10 +30,11 @@
                     return {
                         require: "^promiseWorker",
                         link: function(scope, element, attrs, ctrl) {
-                            ctrl.promise.then(function(result) {
+                            ctrl.promise
+                              .then(function(result) {
+                                return "Success (" + result + ")";
+                            }).then(function(result) {
                                 element.text(result);
-                            }, function(reason) {
-                                element.text("Fail (" + reason + ")");
                             });
                         }
                     }
