@@ -11,8 +11,9 @@
                 .controller("defaultCtrl", function($scope) {
                     $scope.dataValue = "100.23";
                 })
-                .directive("evalExpression", function($parse) {
-                    var expressionFn = $parse("total | currency");
+                .directive("evalExpression", function($interpolate) {
+                    var interpolationFn =
+                            $interpolate("The total is: {{ amount | currency }} (including tax)");
 
                     return {
                         scope: {
@@ -25,7 +26,7 @@
                                     total: Number(newValue)
                                         + (Number(newValue) * (Number(scope.tax) / 100))
                                 }
-                                element.text(expressionFn(scope, localData));
+                                element.text(interpolationFn(scope));
                             });
                         }
                     }
@@ -36,7 +37,7 @@
     <div class="well">
         <p><input class="form-control" ng-model="dataValue"/></p>
         <div>
-            Result: <span eval-expression amount="dataValue" tax="10"></span>
+            <span eval-expression amount="dataValue" tax="10"></span>
         </div>
     </div>
 </body>
