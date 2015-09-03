@@ -15,7 +15,19 @@ angular.module("exampleApp", [])
         }
 
         $scope.deleteProduct = function(product) {
-            $scope.products.splice($scope.products.indexOf(product), 1);
+            var url = baseUrl + product.id;
+            $http({
+                method: "DELETE",
+                url: baseUrl + product.id
+            }).success(function() {
+                $scope.products.splice($scope.products.indexOf(product), 1);
+                console.log("Product id: " + product.id);
+                console.log("Url: " + url);
+            }).error(function() {
+                console.log("Error Product id: " + product.id);
+                console.log("Url: " + url);
+            })
+
         }
 
         $scope.createProduct = function(product) {
