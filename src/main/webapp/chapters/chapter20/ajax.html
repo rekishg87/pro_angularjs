@@ -10,11 +10,17 @@
         angular.module("exampleApp", [])
                 .controller("defaultCtrl", function($scope, $http) {
                     $scope.loadData = function() {
-                        $http.get("backend-data/productData.json").then(function(response) {
-                            console.log("Status: " + response.status);
-                            console.log("Type: " + response.headers("content-type"));
-                            console.log("Length: " + response.headers("content-length"));
-                            $scope.products = response.data;
+                        $http.get("backend-data/productData.xml").then(function(response) {
+                            $scope.products = [];
+                            var productElems = angular.element(response.data.trim()).find("product");
+                            for(var i = 0; i < productElems.length; i++) {
+                                var product = productElems.eq(i);
+                                $scope.products.push({
+                                    name: product.attr("name"),
+                                    category: product.attr("category"),
+                                    price: product.attr("price")
+                                });
+                            }
                         });
                     }
                 });
