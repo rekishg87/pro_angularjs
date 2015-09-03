@@ -9,28 +9,22 @@
     <script>
         angular.module("exampleApp", [])
                 .config(function($httpProvider) {
-                    $httpProvider.defaults.transformResponse.push(function(data, headers) {
-                        if(headers("content-type") == "application/xml"
-                                                        && angular.isString(data)) {
-                            products = [];
-                            var productElems = angular.element(data.trim()).find("product");
-                            for(var i = 0; i < productElems.length; i++) {
-                                var product = productElems.eq(i);
-                                products.push({
-                                    name: product.attr("name"),
-                                    category: product.attr("category"),
-                                    price: product.attr("price")
-                                });
+                    $httpProvider.interceptors.push(function() {
+                        return {
+                            request: function (config) {
+                                config.url = "backend-data/productData.json";
+                                return config;
+                            },
+                            response: function (response) {
+                                console.log("Data Count: " + response.data.length);
+                                return response;
                             }
-                            return products;
-                        } else {
-                            return data;
                         }
                     });
                 })
                 .controller("defaultCtrl", function($scope, $http) {
                     $scope.loadData = function() {
-                        $http.get("backend-data/productData.xml").success(function(data) {
+                        $http.get("backend-data/doesnotexists.json").success(function(data) {
                             $scope.products = data;
                         });
                     }
@@ -62,8 +56,6 @@
             <p>
                 <button class="btn btn-primary"
                     ng-click="loadData()">Load Data</button>
-                <button class="btn btn-primary"
-                    ng-click="sendData()">Send Data</button>
             </p>
         </div>
     </div>
