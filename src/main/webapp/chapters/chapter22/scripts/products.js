@@ -30,8 +30,21 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
             templateUrl: "/angularjs/chapters/chapter22/views/tableView.html"
         });
     })
-    .controller("defaultCtrl", function($scope, $http, $resource, $location, baseUrl) {
+    .controller("defaultCtrl", function($scope, $http, $resource, $location,
+                                        $route, $routeParams, baseUrl) {
         $scope.currentProduct = null;
+
+        $scope.$on("$routeChangeSuccess", function() {
+            if($location.path().indexOf("/edit/") == 0) {
+                var id = $routeParams["id"];
+                for(var i = 0; i < $scope.products.length; i++) {
+                    if($scope.products[i].id == id) {
+                        $scope.currentProduct = $scope.products[i];
+                        break;
+                    }
+                }
+            }
+        });
 
         $scope.productsResource = $resource(baseUrl + ":id", { id: "@id"},
             {
@@ -60,11 +73,6 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
         $scope.updateProduct = function(product) {
             product.$save();
             $location.path("/list")
-        };
-
-        $scope.editProduct = function(product) {
-            $scope.currentProduct = product;
-            $location.path("/edit")
         };
 
         $scope.saveEdit = function(product) {
