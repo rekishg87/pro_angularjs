@@ -10,41 +10,21 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
             requireBase: false
         });
 
-        $routeProvider.when("/list", {
-            templateUrl: "/angularjs/chapters/chapter22/views/tableView.html"
-        });
-
         $routeProvider.when("/edit/:id", {
-            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html"
-        });
-
-        $routeProvider.when("/edit/:id/:data*", {
-            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html"
+            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html",
+            controller: "editCtrl"
         });
 
         $routeProvider.when("/create", {
-            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html"
+            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html",
+            controller: "editCtrl"
         });
 
         $routeProvider.otherwise({
             templateUrl: "/angularjs/chapters/chapter22/views/tableView.html"
         });
     })
-    .controller("defaultCtrl", function($scope, $http, $resource, $location,
-                                        $route, $routeParams, baseUrl) {
-        $scope.currentProduct = null;
-
-        $scope.$on("$routeChangeSuccess", function() {
-            if($location.path().indexOf("/edit/") == 0) {
-                var id = $routeParams["id"];
-                for(var i = 0; i < $scope.products.length; i++) {
-                    if($scope.products[i].id == id) {
-                        $scope.currentProduct = $scope.products[i];
-                        break;
-                    }
-                }
-            }
-        });
+    .controller("defaultCtrl", function($scope, $http, $resource, $location, baseUrl) {
 
         $scope.productsResource = $resource(baseUrl + ":id", { id: "@id"},
             {
@@ -56,23 +36,48 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
             $scope.products = $scope.productsResource.query();
         };
 
+        $scope.createProduct = function(product) {
+            new $scope.productsResource(product).$create().then(function (newProduct)  {
+                $scope.products.push(newProduct);
+                $location.path("/list");
+            });
+        };
+
         $scope.deleteProduct = function(product) {
             product.$delete().then(function() {
                 $scope.products.splice($scope.products.indexOf(product), 1);
             });
-            $location.path("/list")
+
+            $location.path("/list");
         };
 
-        $scope.createProduct = function(product) {
-            new $scope.productsResource(product).$create().then(function (newProduct)  {
-                $scope.products.push(newProduct);
-                $location.path("/list")
-            });
+        $scope.listProducts();
+    })
+    .controller("editCtrl", function($scope, $routeParams, $location) {
+
+        $scope.currentProduct = null;
+
+        if($location.path().indexOf("/edit/") == 0) {
+            var id = $routeParams["id"];
+            for(var i = 0; i < $scope.products.length; i++) {
+                if($scope.products[i].id == id) {
+                    $scope.currentProduct = $scope.products[i];
+                    break;
+                }
+            }
+        }
+
+        $scope.cancelEdit = function() {
+            if($scope.currentProduct && $scope.currentProduct.$get) {
+                $scope.currentProduct.$get();
+            }
+            $scope.currentProduct = {};
+            $location.path("/list");
         };
 
         $scope.updateProduct = function(product) {
             product.$save();
-            $location.path("/list")
+            $location.path("/list");
         };
 
         $scope.saveEdit = function(product) {
@@ -82,16 +87,5 @@ angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
                 $scope.createProduct(product);
             }
             $scope.currentProduct = {};
-        };
-
-        $scope.cancelEdit = function() {
-            if($scope.currentProduct && $scope.currentProduct.$get) {
-                $scope.currentProduct.$get();
-            }
-            $scope.currentProduct = {};
-            $location.path("/list")
-        };
-
-        $scope.listProducts();
+        }
     });
-
