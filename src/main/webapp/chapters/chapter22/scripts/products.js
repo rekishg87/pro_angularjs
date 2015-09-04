@@ -2,8 +2,27 @@
  * Created by Rekish on 9/3/2015.
  */
 
-angular.module("exampleApp", ["increment", "ngResource"])
+angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
     .constant("baseUrl", "http://localhost:5500/products/")
+    .config(function($routeProvider, $locationProvider) {
+        $locationProvider.html5Mode(true);
+
+        $routeProvider.when("/list", {
+            templateUrl: "/views/tableView.html"
+        });
+
+        $routeProvider.when("/edit", {
+            templateUrl: "/views/editorView.html"
+        });
+
+        $routeProvider.when("/create", {
+            templateUrl: "/views/editorView.html"
+        });
+
+        $routeProvider.otherwise({
+            templateUrl: "/views/tableView.html"
+        });
+    })
     .controller("defaultCtrl", function($scope, $http, $resource, baseUrl) {
         $scope.displayMode = "list";
         $scope.currentProduct = null;
