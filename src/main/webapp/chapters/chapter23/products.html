@@ -11,11 +11,15 @@
     <link href="css/bootstrap-theme.css" rel="stylesheet"/>
     <script src="scripts/products.js"></script>
     <script src="scripts/increment.js"></script>
+    <style type="text/css">
+        .ngFade.ng-enter { transition: 0.1s linear all; opacity: 0; }
+        .ngFade.ng-enter-active { opacity: 1; }
+    </style>
 </head>
 <body ng-controller="defaultCtrl">
     <div class="panel panel-primary">
         <h3 class="panel-heading">Products</h3>
-        <div ng-view></div>
+        <div ng-view class="ngFade"></div>
     </div>
 </body>
 </html>
