@@ -5,22 +5,25 @@
 angular.module("exampleApp", ["increment", "ngResource", "ngRoute"])
     .constant("baseUrl", "http://localhost:5500/products/")
     .config(function($routeProvider, $locationProvider) {
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
 
         $routeProvider.when("/list", {
-            templateUrl: "/views/tableView.html"
+            templateUrl: "/angularjs/chapters/chapter22/views/tableView.html"
         });
 
         $routeProvider.when("/edit", {
-            templateUrl: "/views/editorView.html"
+            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html"
         });
 
         $routeProvider.when("/create", {
-            templateUrl: "/views/editorView.html"
+            templateUrl: "/angularjs/chapters/chapter22/views/editorView.html"
         });
 
         $routeProvider.otherwise({
-            templateUrl: "/views/tableView.html"
+            templateUrl: "/angularjs/chapters/chapter22/views/tableView.html"
         });
     })
     .controller("defaultCtrl", function($scope, $http, $resource, $location, baseUrl) {
