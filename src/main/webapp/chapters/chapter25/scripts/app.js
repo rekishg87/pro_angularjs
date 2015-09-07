@@ -18,6 +18,7 @@ angular.module("exampleApp", [])
 
         $http.get("productData.json").success(function (data) {
             $scope.products = data;
+            $log.log("There are " + data.length + " items");
         });
 
         $scope.counter = 0;
