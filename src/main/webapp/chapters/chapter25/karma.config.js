@@ -18,7 +18,6 @@ module.exports = function(config) {
       'angular.js',
       'scripts/angular.js',
       'scripts/angular-mocks.js',
-      'scripts/angular-mocks.js',
       'scripts/*.js',
       'tests/*.js'
     ],
